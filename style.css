@@ -1,0 +1,10 @@
+body{
+    width: 100%;
+    height: 100%;
+    background-image:url("npm.PNG");
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+.doge{
+    background-image:url("frame.jpg");   
+}
