@@ -61,7 +61,7 @@ function addPopup(e){
     amt*=2;
 }
 document.addEventListener("click",addPopup)
-document.addEventListener("mousemove",smile)
+document.addEventListener("mousemove",addPopup)
 document.addEventListener("scroll",playback)
 document.addEventListener("keydown",function pauseSmileys(e){
     if(e.key!==" ") return true;
