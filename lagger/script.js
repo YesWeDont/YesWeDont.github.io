@@ -14,7 +14,7 @@ function smile(e){
     //document.body.style.backgroundColor=`rgb(${Math.random()*256},${Math.random()*256},${Math.random()*256})`
     let id="id-"+Math.round(Math.random()*10000000000);
     let img=document.createElement("img");
-    img.src=(["/frame.jpg","smile.png"])[Math.floor(Math.random()*2)];
+    img.src=(["frame.jpg","smile.png"])[Math.floor(Math.random()*2)];
     img.id=id;
     let xStretch=Math.random()
     img.height=277*2*xStretch;
