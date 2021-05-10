@@ -1,48 +1,59 @@
 <html>
-    <head>
-        <title>Totally accurate CPS simulator</title>
-        <style>
-            body{
-                text-align: center;
-                height: 100%;
-                width: 100%;
-                margin: 0;
-                background-color: chocolate;
-            }
-            div{
-                text-align:inherit;
-                margin:auto;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Click to start</h1>
-        <script>
-            (()=>{
-        let body=document.body;
-        let clicks=0
-            function initClicker(){
-            console.log("clicker")
-            body.removeEventListener("click",initClicker)
-            click=0;
-            body.innerHTML="<h1>Click to start</h1>"
-            function getClick(){
-                document.body.innerHTML="<h1>Click more</h1>"
-                clicks++;
-                console.log(clicks)
-            }
-                body.addEventListener("click",getClick)
-            setTimeout(()=>{
-                body.removeEventListener("click",getClick);
-                //alert(`You got ${clicks/5} cps in 5 seconds`)
-                body.innerHTML=`<h1>${clicks/5} CPS</h1>`
-                alert(`${clicks/5} CPS`)
-                clicks=0;
-                setTimeout(()=>{body.addEventListener("click",initClicker)},1000)
-            },5000);
+<head>
+    <title>Totally accurate CPS simulator</title>
+    <style>
+        body{
+            text-align: center;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background-color: chocolate;
         }
-        body.addEventListener("click",initClicker);
-    })()
-        </script>
-    </body>
+        div{
+            text-align:inherit;
+            margin:auto;
+        }
+        .inprogress::before{
+            content: "Click more";
+            font-size: 2em;
+            font-weight: bold;
+        }
+        *{
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click to start</h1>
+    <script>
+        (()=>{
+            let body=document.body;
+            let clicks=0
+            function initClicker(){
+                console.log("clicker")
+                body.removeEventListener("click",initClicker)
+                click=0;
+                body.before="Click to start"
+                let t=Date.now()
+                function getClick(){
+                    body.innerHTML=`<br>Time Elapsed:${Date.now()-t}ms<br>Clicks scored:${clicks+1}`
+                    body.classList.add("inprogress")
+                    clicks++;
+                    console.log(clicks)
+                }
+                body.addEventListener("click",getClick)
+                setTimeout(()=>{
+                    body.removeEventListener("click",getClick);
+                    body.classList.remove("inprogress")
+                    //alert(`You got ${clicks/5} cps in 5 seconds`)
+                    body.innerHTML="<H1>Click to play again!</H1>"
+                    alert(`${clicks/5} CPS`)
+                    clicks=0;
+                    setTimeout(()=>{body.addEventListener("click",initClicker)},1000)
+                },5000);
+            }
+            body.addEventListener("click",initClicker);
+        })()
+    </script>
+</body>
 </html>

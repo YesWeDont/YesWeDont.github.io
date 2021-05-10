@@ -1,40 +1,9 @@
 body{
     margin:0;
     text-align: center;
-    background: #0B3954;
+    display:flex;
+    flex-direction: column;
 }
-h1{
-    font-size:3.5vw;
-    background:#7ebce6;
-    color:#2B2D42;
-    margin:0;
-    width:100vw;
-    height:15vh;
-    line-height:7.5vh;
-}
-table{
-    border-style: hidden;
-    border-collapse: collapse;
-    background:linear-gradient(to bottom right,#748CAB,#00c49a);
-}
-
-tr{
-    width:100ww;
-    height:20vh;
-}
-td{
-    font-size:3vw;
-    width:50vw;
-    height: 20vh;
-    line-height: 20vh;
-    border:1px solid black;
-    color:#fff;
-    text-align: center;
-}
-
-a{
-    text-decoration:none;
-    color:#fff;
-    display:block;
-    //text-align: center;
+.main{
+    align-self: stretch;
 }
