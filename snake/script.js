@@ -7,6 +7,7 @@ window.onload=()=>{
     let cd=0;
     let squares=15
     let b=false;
+    let pause=false;
     /**
      * @type {(Number[])[]}
      * @description turn loc, eg [[0,0],[5,0],[5,5]], first one is head, last one is tail
@@ -17,9 +18,12 @@ window.onload=()=>{
     let timeout=Date.now()
     console.log("lod")
 
-
-
     //bindkey
+    document.addEventListener("keydown",({key})=>{
+        if(key==="Escape"){
+            pause=!pause;
+        }
+    })
     document.addEventListener("keydown",(e)=>{
         console.log("keypress "+e)
         if(Date.now()-timeout<=250) return;
@@ -54,6 +58,11 @@ window.onload=()=>{
 
     function gameLoop(){
         ctx.clearRect(0,0,canvas.width,canvas.height)
+        if(pause){
+            ctx.font="30px Arial"
+            ctx.fillText("Game paused; Press Esc to continue",0,30)
+            return;
+        }
         snake.unshift([ snakeDirection[0]+snake[0][0] , snakeDirection[1]+snake[0][1] ])
         snake.pop();
         if(b){
