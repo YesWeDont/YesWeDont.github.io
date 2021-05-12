@@ -1,110 +1,115 @@
-window.onload=()=>{
-    let scorekeeper=document.querySelector("p");
-    let canvas=document.querySelector("canvas");
-    canvas.height=Math.min(innerHeight,innerWidth);
-    canvas.width=canvas.height
-    let ctx=canvas.getContext("2d");
-    let cd=0;
-    let squares=15
-    let b=false;
-    let pause=false;
-    /**
-     * @type {(Number[])[]}
-     * @description turn loc, eg [[0,0],[5,0],[5,5]], first one is head, last one is tail
-     */
-    let snake=[[4,4],[4,3]];
-    let appleLocation=[4,5];
-    let snakeDirection=[0,0];
-    let timeout=Date.now()
+window.onload=function game(){
+    let UI={
+        scorekeeper:document.querySelector("p"),
+        canvas:document.querySelector("canvas"),
+        ctx:null
+    }
+    UI.canvas.height=Math.min(innerHeight,innerWidth)-30;
+    UI.canvas.width=UI.canvas.height+30
+    UI.ctx=UI.canvas.getContext("2d");
+    let config={
+        squares:30,
+        fps:10
+    }
+    let rt={
+        paused:false,
+        /**
+         * @type {(Number[])[]}
+         * @property {Number[]} direction
+         * @description turn loc, eg [[0,0],[5,0],[5,5]], first one is head, last one is tail
+         */
+        snake:[[4,4],[4,3]],
+        apple:[4,5],
+        lastKeyPress:Date.now()
+    }
+    rt.snake.direction=[0,0]
     console.log("lod")
 
     //bindkey
     document.addEventListener("keydown",({key})=>{
         if(key==="Escape"){
-            pause=!pause;
+            rt.paused=!rt.paused;
         }
     })
     document.addEventListener("keydown",(e)=>{
-        console.log("keypress "+e)
-        if(Date.now()-timeout<=250) return;
-        timeout=Date.now()
-        if( (e.key==="s"||e.key==="ArrowDown") && (!compare(snakeDirection,[0,-1]))){
-            snakeDirection=[0,1]
+        console.log("keydwon "+e)
+        if(Date.now()-rt.timeout<=100) return;
+        rt.timeout=Date.now()
+        if( (e.key==="s"||e.key==="ArrowDown") && (!compare(rt.snake.direction,[0,-1]))){
+            rt.snake.direction=[0,1]
             e.preventDefault();
             e.stopPropagation();
             return false;
-        }else if( (e.key==="w"||e.key==="ArrowUp") && (!compare(snakeDirection,[0,1])) ){
-            snakeDirection=[0,-1]
+        }else if( (e.key==="w"||e.key==="ArrowUp") && (!compare(rt.snake.direction,[0,1])) ){
+            rt.snake.direction=[0,-1]
             e.preventDefault();
             e.stopPropagation();
             return false;
-        }else if( (e.key==="a" || e.key==="ArrowLeft") && (!compare(snakeDirection,[1,0])) ){
-            snakeDirection=[-1,0];
+        }else if( (e.key==="a" || e.key==="ArrowLeft") && (!compare(rt.snake.direction,[1,0])) ){
+            rt.snake.direction=[-1,0];
             e.preventDefault();
             e.stopPropagation();
             return false;
-        }else if( (e.key==="d" || e.key==="ArrowRight") && (!compare(snakeDirection,[-1,0])) ){
-            snakeDirection=[1,0];
+        }else if( (e.key==="d" || e.key==="ArrowRight") && (!compare(rt.snake.direction,[-1,0])) ){
+            rt.snake.direction=[1,0];
             e.preventDefault();
             e.stopPropagation();
             return false;
-        }
-        if(e.key==="b"&&Date.now()-cd>1000){
-            b=true;
         }
     });
     let interval=0;
 
 
     function gameLoop(){
-        ctx.clearRect(0,0,canvas.width,canvas.height)
-        if(pause){
-            ctx.font="30px Arial"
-            ctx.fillText("Game paused; Press Esc to continue",0,30)
+        UI.ctx.clearRect(0,0,UI.canvas.width,UI.canvas.height)
+        interval=setTimeout(gameLoop,100);
+        if(rt.paused){
+            UI.ctx.font="30px Arial"
+            UI.ctx.fillText("Game paused; Press Esc to continue",0,30)
             return;
         }
-        snake.unshift([ snakeDirection[0]+snake[0][0] , snakeDirection[1]+snake[0][1] ])
-        snake.pop();
-        if(b){
-            b=false;
-            cd=Date.now()
-            snake=snake.map(a=>[a[0]+snakeDirection[0],a[1]+snakeDirection[1]])
-        }
+        rt.snake.unshift([ rt.snake.direction[0]+rt.snake[0][0] , rt.snake.direction[1]+rt.snake[0][1] ])
+        rt.snake.pop();
         
         //growth
-        if(appleLocation.toString()===snake[0].toString()){
-            scorekeeper.innerHTML=`Score: ${snake.length-1}`
-            let finalsnake=snake.slice(snake.length-2);
+        if(rt.apple.toString()===rt.snake[0].toString()){
+            UI.scorekeeper.innerHTML=`Score: ${rt.snake.length-1}`
+            let finalsnake=rt.snake.slice(rt.snake.length-2);
             let direction=finalsnake[0].map((a,i)=>a-finalsnake[1][i])
-            snake.push([finalsnake[1][0]-direction[0],finalsnake[1][1]-direction[1]])
-            while(contains(snake,appleLocation)){
-                appleLocation=([Math.floor(Math.random()*squares),Math.floor(Math.random()*squares)]);
+            rt.snake.push([finalsnake[1][0]-direction[0],finalsnake[1][1]-direction[1]])
+            while(contains(rt.snake,rt.apple)){
+                rt.apple=([Math.floor(Math.random()*config.squares),Math.floor(Math.random()*config.squares)]);
             }
         }
 
         //deaths
-        if((snake[0][0]<0||snake[0][0]>squares)||(snake[0][1]<0||snake[0][1]>squares)){
-            alert("You hit the wall!")
-            clearInterval(interval)
+        if(rt.snake[0].some(a=>a<0||a>config.squares)){
+            alert("You hit the wall! Reload to play again")
+            clearTimeout(interval)
+            return;
         }
-        if(snake.slice(1).findIndex(a=>compare(a,snake[0]))>0){
-            alert("You hit yourself!")
-            clearInterval(interval)
+        if(rt.snake.length>4){
+            if(rt.snake.slice(1).some( a=>compare(a,rt.snake[0]) )){
+                alert("You hit yourself! Reload to play again")
+                clearTimeout(interval)
+                return
+            }
         }
 
         //render loop
-        snake.forEach(drawSquare("green"))
-        drawSquare("red")(appleLocation)
+        rt.snake.forEach(drawSquare("green"))
+        drawSquare("red")(rt.apple)
+
     }
-    interval=setInterval(gameLoop,500);
+    interval=setTimeout(gameLoop,100);
     function drawSquare(color){
         /** Renders square
          * @param {Number[]} v square to be rendered
          */
         return function render(v){
-            let square=canvas.height/squares;
-            ctx.fillStyle=color;
-            ctx.fillRect(v[0]*square,v[1]*square,square,square);
+            let square=UI.canvas.height/config.squares;
+            UI.ctx.fillStyle=color;
+            UI.ctx.fillRect(v[0]*square,v[1]*square,square,square);
         }
     }
     /**
@@ -114,6 +119,7 @@ window.onload=()=>{
      * @returns 
      */
     function compare(s1,s2){
+        console.log(`Comp`,s1,s2)
         return s1.join()===s2.join()
     }
     /**
