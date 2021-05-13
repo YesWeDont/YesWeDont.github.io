@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Count</title>
+</head>
+<body>
+    <textarea rows="25" cols="100"></textarea>
+    <p class="words">Word Count:</p>
+    <script>
+        document.addEventListener("keydown",count)
+        document.querySelector("textarea").addEventListener("paste",count)
+        document.querySelector("textarea").addEventListener("cut",count)
+        function count(){
+            if(!document.querySelector("textarea").value) time=Date.now()
+            document.querySelector(".words").innerHTML="Loading..."
+            document.querySelector(".words").innerHTML="Word count: "+document.querySelector("textarea").value.split(/[ ,.!?-]/gm)
+            .filter(a=>a)
+            .filter(a=>a.length>1)
+            .filter(a=>a!==a.replace(/\w+/))
+            .length
+            document.querySelector('time').innerHTML=Date.now() - time;
+        }
+    </script>
+</body>
+</html>

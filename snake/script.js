@@ -5,7 +5,7 @@ window.onload=function game(){
         ctx:null
     }
     UI.canvas.height=Math.min(innerHeight,innerWidth)-30;
-    UI.canvas.width=UI.canvas.height+30
+    UI.canvas.width=UI.canvas.height+20
     UI.ctx=UI.canvas.getContext("2d");
     let config={
         squares:30,
@@ -20,6 +20,7 @@ window.onload=function game(){
          */
         snake:[[4,4],[4,3]],
         apple:[4,5],
+        boost:Date.now(),
         lastKeyPress:Date.now()
     }
     rt.snake.direction=[0,0]
@@ -33,8 +34,12 @@ window.onload=function game(){
     })
     document.addEventListener("keydown",(e)=>{
         console.log("keydwon "+e)
-        if(Date.now()-rt.timeout<=100) return;
+        if(Date.now()-rt.timeout<=140) return;
         rt.timeout=Date.now()
+        if(e.key==="b"&& (Date.now()-rt.boost> 1000)){
+            rt.boost=Date.now()
+            console.log("boosty juice")
+        }
         if( (e.key==="s"||e.key==="ArrowDown") && (!compare(rt.snake.direction,[0,-1]))){
             rt.snake.direction=[0,1]
             e.preventDefault();
@@ -70,7 +75,13 @@ window.onload=function game(){
         }
         rt.snake.unshift([ rt.snake.direction[0]+rt.snake[0][0] , rt.snake.direction[1]+rt.snake[0][1] ])
         rt.snake.pop();
-        
+        if((Date.now()-rt.boost) < 100){
+            console.log("bot")
+            rt.snake.unshift([ rt.snake.direction[0]+rt.snake[0][0] , rt.snake.direction[1]+rt.snake[0][1] ])
+            rt.snake.pop();
+            rt.snake.unshift([ rt.snake.direction[0]+rt.snake[0][0] , rt.snake.direction[1]+rt.snake[0][1] ])
+            rt.snake.pop();
+        }
         //growth
         if(rt.apple.toString()===rt.snake[0].toString()){
             UI.scorekeeper.innerHTML=`Score: ${rt.snake.length-1}`
@@ -119,7 +130,6 @@ window.onload=function game(){
      * @returns 
      */
     function compare(s1,s2){
-        console.log(`Comp`,s1,s2)
         return s1.join()===s2.join()
     }
     /**
