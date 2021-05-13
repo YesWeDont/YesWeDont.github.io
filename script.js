@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded",()=>{
     let keys=0;
     let l=document.querySelectorAll(".material-title")
-    l.forEach(a=>!(a.onclick=found)/*||console.log(a)/*)
+    l.forEach(a=>!(a.onclick=found)/*||console.log(a)*/)
     let d=document.querySelectorAll(".model")
     d.forEach(a=>!(a.ondblclick=found)/*||console.log(a)*/);
     let r=document.querySelectorAll(".link")
