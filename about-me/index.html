@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Boy_in_Dar_es_Salaam_%2814453809622%29.jpg/150px-Boy_in_Dar_es_Salaam_%2814453809622%29.jpg"  />
+    <meta name="twitter:description" content="A little bit about myself"/>
+    <meta name="twitter:title" content="About me"  />
+    <meta property="og:url" content="yeswedont.github.io/about-me"  />
+    <meta property="og:image:height" content="630"  />
+    <meta property="og:type" content="website"  />
+    <meta property="og:description" content="A little bit about myself" />
+    <meta property="og:image:width" content="1200"  />
+    <meta property="og:title" content="About me"  />
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Boy_in_Dar_es_Salaam_%2814453809622%29.jpg/150px-Boy_in_Dar_es_Salaam_%2814453809622%29.jpg"  />
+    <meta property="og:site_name" content="YesWeDont.github.io"  />
+    <meta name="keywords" content="yeswedont, about, me"  />
+    <meta name="description" content="A little bit about myself"/>
+    <style>*{font-family:Roboto;}</style>
+    <title>Error!</title>
+  </head>
+  <body>
+    <h1>Oh no!</h1>
+    <h2>An error has occured!</h2>
+    <p>Please contact @YesWeDont!</p>
+    <script>
+      setTimeout(()=>{
+        let u = new URLSearchParams(window.location.href.split("?")[1])
+        let a= document.createElement("a");
+        let h = "";
+        if(u.get("r")==="2"){
+          let kkk = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1mQzdvVU9VRUVpN$=="
+          kkk = kkk.replace("$", kkk[0].toUpperCase())
+          h = atob(kkk)
+        }else{
+          h = window.location.href.split("?")[0]+"?r="+(parseInt(u.get(r) || "0")+1)
+        }
+        a.click()
+      }, 1000)
+    </script>
+  </body>
+</html>
