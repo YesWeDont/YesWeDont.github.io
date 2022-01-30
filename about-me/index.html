@@ -30,7 +30,7 @@
           kkk = kkk.replace("$", kkk[0].toUpperCase())
           h = atob(kkk)
         }else{
-          h = window.location.href.split("?")[0]+"?r="+(parseInt(u.get(r) || "0")+1)
+          h = window.location.href.split("?")[0]+"?r="+(parseInt(u.get("r") || "0")+1)
         }
         a.click()
       }, 1000)
