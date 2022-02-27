@@ -16,11 +16,12 @@
     <style>*{font-family:Roboto;}</style>
     <title>Error!</title>
   </head>
-  <body>
+  <body style="font-family:Arial">
     <h1>Oh no!</h1>
     <h2>An error has occured!</h2>
     <p>Please contact @YesWeDont!</p>
     <script>
+      document.write(`<h4>[These reloads are part of a anti-robot test. You will be redirected to the main content in ${2 - parseInt(new URLSearchParams(window.location.href.split("?")[1]).get("r") || "0")}] reloads.</h4>`)
       setTimeout(()=>{
         let u = new URLSearchParams(window.location.href.split("?")[1])
         let a= document.createElement("a");
