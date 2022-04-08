@@ -1,4 +1,6 @@
 .vscode/**/*
 .vscode
+*.js.map
 *.js
 !script.js
+!snake/dist/*.js
