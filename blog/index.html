@@ -1,22 +1,18 @@
-<!--Stuck-->
+<!--Gotham-->
 <html>
   <head>
-    <meta name="twitter:title" content="About me"  />
-    <meta property="og:title" content="About me"  />
-    
-    <meta name="twitter:description" content="A little bit about myself"/>
-    <meta property="og:description" content="A little bit about myself" />
-    <meta name="description" content="A little bit about myself"/>
-    
-    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/47885665?s=400&v=4"  />
-    <meta property="og:image" content="https://avatars.githubusercontent.com/u/47885665?s=400&v=4"  />
+    <meta name="twitter:title" content="YesWeDont's Blog"  />
+    <meta property="og:title" content="YesWeDont's Blog"  />
 
-    <meta property="og:url" content="yeswedon.tk/about-me"  />
+    <meta name="twitter:description" content="What's up, YesWeDont?"/>
+    <meta property="og:description" content="What's up, YesWeDont?" />
+
+    <meta property="og:url" content="yeswedon.tk/blog"  />
     <meta property="og:type" content="website"  />
     <meta property="og:site_name" content="yeswedon.tk"  />
-    
-    <meta name="keywords" content="yeswedont, about, me"  />
-    
+
+    <meta name="keywords" content="yeswedont, blog"  />
+    <meta name="description" content="YesWeDont's Blog"/>
     <style>*{font-family:Arial;}</style>
     <title>Error!</title>
   </head>
@@ -31,8 +27,8 @@
         let a= document.createElement("a");
         let h = "";
         if(u.get("r")==="2"){
-          let kkk = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1mQzdvVU9VRUVpN$=="
-          kkk = kkk.replace("$", kkk[0].toUpperCase())
+          let kkk = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0$2g/dj1TMDJCSG1XUFpOcw=="
+          kkk = kkk.replace("$", kkk[9].toUpperCase())
           h = atob(kkk)
         }else{
           h = window.location.href.split("?")[0]+"?r="+(parseInt(u.get("r") || "0")+1)
@@ -40,6 +36,9 @@
         a.href = h;
         a.click()
       }, 1000)
+    </script>
+  </body>
+</html>
     </script>
   </body>
 </html>
