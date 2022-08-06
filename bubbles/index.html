@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="html">
+    <head>
+        <title>Bubble</title>
+        <style>
+            body{
+                margin:0;
+                overflow:hidden;
+            }
+            #fps{
+                position: absolute;
+                bottom:0;
+                left:0;
+                color: #15ff0086;
+                margin: 0;
+                font-size: 20pt;
+                z-index:2;
+            }
+            #score{
+                position: absolute;
+                top:0;
+                font-size: 20pt;
+            }
+            canvas{
+                margin:0;
+                z-index: 1;
+            }
+            .fill{
+                z-index: 3;
+                position: fixed;
+                align-content: center;
+                top:0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-color: rgb(131, 131, 131);
+                text-align: center;
+                vertical-align: bottom;
+            }
+            .center{
+                position: relative;
+                top:50%;
+                display: inline-block;
+                margin: auto;
+            }
+            button{
+                color: white;
+                font-size: 20pt;
+                border-radius: 30px;
+                background-color: black;
+                border-color: grey;
+                border-style: solid;
+            }
+            h1{
+                color: white;
+            }
+            canvas:hover{
+                cursor: none;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <p id="score">0</p>
+        <p id="fps">dkjfhdskfyh</p>
+        <script src="engine/rng.js"></script>
+        <script src="engine/rnglist.js"></script>
+        <script src="engine/bubble.js"></script>
+        <script src="engine/manager.js"></script>
+        <script src="tables.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
