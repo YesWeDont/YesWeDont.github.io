@@ -14,14 +14,10 @@
         document.querySelector("textarea").addEventListener("paste",count)
         document.querySelector("textarea").addEventListener("cut",count)
         function count(){
-            if(!document.querySelector("textarea").value) time=Date.now()
             document.querySelector(".words").innerHTML="Loading..."
-            document.querySelector(".words").innerHTML="Word count: "+document.querySelector("textarea").value.split(/[ ,.!?-]/gm)
-            .filter(a=>a)
-            .filter(a=>a.length>1)
-            .filter(a=>a!==a.replace(/\w+/))
-            .length
-            document.querySelector('time').innerHTML=Date.now() - time;
+            document.querySelector(".words").innerHTML="Word count: "+document.querySelector("textarea").value.split(/[\s,.!?-]/gm)
+                .filter(a=>a.trim())
+                .length;
         }
     </script>
 </body>

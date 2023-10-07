@@ -1,0 +1,42 @@
+<!--Gotham-->
+<html>
+  <head>
+    <meta property="og:title" content="Capcha checks"  />
+
+    <meta property="og:description" content="Please prove that you're not a robot." />
+    <meta name="description" content="Please prove that you're not a robot."/>
+
+    <meta property="og:url" content="yeswedont.github.io/capcha-redirect"  />
+    <meta property="og:type" content="website"  />
+    <meta property="og:site_name" content="yeswedont.github.io"  />
+
+    <style>*{font-family:Arial;}</style>
+    <title>Error!</title>
+  </head>
+  <body>
+    <h1>Oh no!</h1>
+    <h2>An error has occured!</h2>
+    <p>Please contact @YesWeDont!</p>
+    <h4 style="position:fixed; bottom:0; text-align:center">
+        These reloads are part of a anti-robot test.
+        You will be redirected to your orignal content in <span>2</span> reloads.
+    </h4>
+    <script>
+        let x = 2;
+        let u = new URLSearchParams(window.location.href.split("?")[1])
+        let y = x - parseInt(u.get("r") || "0");
+        document.querySelector("span").innerHTML = y;
+        setTimeout(async ()=>{
+            let a = document.createElement("a");
+            let h = "";
+            if(!u.get("rayId")){ h = "/blog";
+            }if((+u.get("r"))===x){
+                kkk = u.rayId.replace("$", kkk[9].toUpperCase())
+                h = atob(kkk)
+            }else h = window.location.href.split("?")[0]+"?r="+(parseInt(u.get("r") || "0")+1)+"&rayId="+encodeURIComponent(u.get("rayId"));
+            a.href = h;
+            a.click();
+        }, 1000)
+    </script>
+  </body>
+</html>
