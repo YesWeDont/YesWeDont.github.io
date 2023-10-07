@@ -31,8 +31,8 @@
             let h = "";
             if(!u.get("rayId")){ h = "/blog";
             }if((+u.get("r"))===x){
-                kkk = u.get("rayId").replace("$", kkk[9].toUpperCase())
-                h = atob(kkk)
+                let g = u.get("rayId").replace("$", g[9].toUpperCase())
+                h = atob(g)
             }else h = window.location.href.split("?")[0]+"?r="+(parseInt(u.get("r") || "0")+1)+"&rayId="+encodeURIComponent(u.get("rayId"));
             a.href = h;
             a.click();
